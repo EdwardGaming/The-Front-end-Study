@@ -1,0 +1,112 @@
+ /* 元素选择器 */
+h1, h2, h3 {   
+    background: gray;
+    color: yellow;
+}
+
+/* 元素选择器 */
+h1 {          
+    border: 3px solid green;
+}
+
+/* ID 选择器  */
+#logo {      
+    color: springgreen;
+    font-weight: 900;
+}
+
+ /*  类选择器  */
+.red {   
+    color: red;
+}
+.red.bold {
+    font-weight: 900;
+}
+
+/* 相邻选择器 */
+div {
+    min-height: 50px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 10px;
+} 
+.a + div {    /* 相邻选择器:选取a接下来的兄弟，仅选一个*/
+    background: rgba(255, 0, 0, 0.3);
+}
+.a ~ div {   /* 通用相邻选择器:选取a接下来的所有与a平行的兄弟，从上向下选取 */
+    background: rgba(0, 255, 0, 0.3);
+}
+
+/* 伪类选择器 */
+a:link {   /* 未访问链接样式 */
+    color: blue;
+}
+a:visited {     /* 已访问链接样式 */
+    color: gray;
+}
+button:hover, a:hover {    /* 鼠标悬停激活时对象样式 */
+    background: #888;
+}
+button:active {    /*按钮点击激活时对象样式 */
+    background: #333;
+}
+input:focus {   /* 作用于输入框的样式  */
+    outline: none;
+    background: #aaa;
+}
+
+/* 伪元素选择器 */
+p:first-letter {    /*  段落首元素选择器 */
+    font-size: 30px; 
+}
+.help:before {    /* 在文本的开头操作文本内容  */
+    content: "-";
+    color: red;
+}
+.help:after {  /* 在文本的末尾操作文本内容 */
+    content: "[?]";
+    color: blue; 
+}
+div p:first-child {    /*  在div标签中选取第一个p标签的内容样式  */
+    color: blue;
+}
+div p:last-child {      /*  在div标签中选取最后一个p标签的内容样式  */
+    color: red;
+}
+div p:nth-child(2) {    /*  在div标签中选取第2个p标签的内容样式  */
+    color: yellow;
+}
+
+/* 字体属性 */
+p {
+    font-family: "微软雅黑"， "Microsoft Yahei";     /* 字体样式(优先寻找前者字体，若前者没有，则使用后者字体) */
+    font-weight: 900;     /* 字重 即字体粗细 */
+    font-size: 20px;     /*  字体大小 (inherit   继承母字体大小)  像素指定 比例指定*/
+}
+
+/* 文字属性 */
+p {
+    text-align: left;      /* 文字对齐方式 (center 为向中对齐  justify  为向两边对齐 平铺)*/
+    line-height: 1;      /*  文字间行高   像素指定 比例指定 */
+    text-decoration: none;    /*  文字×划线   underline 下划线  overline 上划线  line-through 字中线  */
+}
+a {
+    text-decoration: none;
+}
+
+/* display属性 */
+.block {   /* 块级元素 默认占整宽，即使限制了宽度，依旧会用边距margin填充剩下的内容 */
+    display: block;
+}
+.inline {   /* 行内元素  */
+    display: inline;
+}
+.inline-block {   /* 行内块元素 */
+    display: inline-block;
+}
+
+.table,
+.table table,
+.table table tr th,
+.table table tr td {
+    border: #333 solid 1px;
+}
