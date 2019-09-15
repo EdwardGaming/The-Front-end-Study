@@ -1,0 +1,93 @@
+CSS笔记：Cascading Style Sheet
+    css引入方式: 1.内嵌方式: 在html文件中的head标签内通过 style标签插入
+                    eg.<style>
+                            p{
+                                a: b;
+                                c: d;
+                            } 
+                        </style>
+                2.link引入方式: <link rel="stylesheet" href="#">  #为 .ccs 文件地址
+                    最常用的方式
+                3.import方式： 先引入.css文件 在.css文件中通过 @import url(#.css) 
+                    引入另一个css文件
+                4.直接引用方式: 在html中 body标签内直接引用 
+                    eg. <p style="..."></p>  优先级最高
+                注:  !important 为最高优先级 
+    元素选择器: 用于限定样式在页面中的范围   
+    类选择器:用于指定页面中的一类元素    eg. <p class="类名"></p>
+    ID选择器:用于指定页面中的某一唯一元素    eg. <p id="ID名"></p>
+    属性选择器:用于指定页面中具有相同属性   利用 []  选择对应属性
+        eg. [title] 选择所有title属性
+            [title="###"] 选择值为 ### 的title属性
+            [title~="###"]  选择含有 ### 的title属性 （title含有多个值）
+            [title*="###"]  选择值中包含 ### 的title属性
+            [title^="###"]  选择值以 ### 开始的title属性
+            [title$="###"]  选择值以 ### 结束的title属性
+    后代选择器:便于更准确地定位标签
+    相邻选择器及通用相邻选择器: 前者用 '+' 链接  后者用 '~' 链接
+        前者仅会选取接下来的一个平行兄弟
+        后者将会选取接下来所有平行的兄弟
+    伪类选择器:  a:link {}  未访问链接样式
+                a:visited {}   已访问链接样式
+                a:hover {}  鼠标悬停激活对象样式
+                a:active {}   鼠标点击激活对象样式
+                input:focus {}  输入框的样式
+    伪元素选择器:
+    全局选择器:  表示方式  * {}
+    选择器权重: 行内样式(style属性) > ID选择器(#ID) > 类(.class)、
+            属性([href])、伪类选择器(:active) > 元素(div)、
+            伪元素选择器(:before)         
+            同一权重时比较选择器数量
+            注: !important  为最高权重
+            eg. div {
+                    color: blue !important;
+                }
+    字体属性:    font-family  字体样式
+                font-weight  字体粗重 (100-900, 也可以利用 normal、lighter、bold指定)
+                font-size    字体大小 (可指定像素大小或百分比大小)
+                font-style   字体是否斜体( italic 为斜体)
+            font属性各属性顺序：
+                font: style weight size/line-height font-family (其中，size、family属性必须设置)
+                eg：font: italic bold 30px/60px "Microsoft YaHei","宋体";
+    文字属性:    color: red;  颜色
+                letter-spacing: -2px;  字符间距（可设置负值）
+                word-spacing: -2px;  字间距（可设置负值）
+                direction: ltr;  文字书写方向(从左向右（默认） ltr、从右向左 rtl)
+                text-align: center  文字对齐方式(居中对齐 center、左对齐（默认） left、右对齐 right、两端对齐 justify)
+                line-height   行间距
+                text-decoration   文字×划线(无划线 none、上划线 overline、字间划线 line-through、 下划线 underline)
+                text-indent: 60px;  文字缩进
+                text-transform    英文大小写字母(全大写 uppercase、全小写 lowercase、首字母大写 capitalize)
+                vertical-align   垂直对齐(top、center、bottom)
+        超出宽度的文字用省略号显示的方法：
+            eg：white-space: nowrap;    文字不换行处理
+                overflow: hidden;     超出部分隐藏
+                text-overflow: ellipsis;    (将多余的部分转换成省略号，clip为默认值、保持原样)
+    display属性: 制定文字的显示方式
+                block  块级元素  即使设置了width宽度,也要独占一行整宽
+                inline  行内元素   内嵌行内文字，边缘padding只能变化左右宽度，上下高度不变化
+                inline-block   行内块元素  内嵌行内块儿文字，边缘padding可以变化上下左右宽高度
+                none   隐藏块元素
+    框(Block Box): 由内至外
+                content(内容区): 具有 width 和  height 两个属性
+                padding(内边距):
+                border(边框):  solid 为实线边框  dotted 为正方形虚线边框  dashed 为长方形虚线边框
+                margin(外边距):
+                注: 可以将content视为身体骨架，padding视为肌肉
+                    border视为衣服，margin视为身体的气场或结界
+    继承:   继承的权重小于任何其他选择器
+    background属性：背景属性内各属性顺序，可缺省某一属性
+            background: color image repeat attachment position
+        单条属性的添加：
+            背景颜色： background-color: #123456;
+            背景图片： background-image: url();
+            背景平铺方式: background-repeat: repeat;（默认全屏幕平铺）
+                repeat-x、repeat-y 分别为在x轴和在y轴方向平铺，no-repeat 为不平铺、图片仅出现一次
+            背景图片是否固定: background-attachment: fixed(固定);  默认为不固定
+            背景图片位置: background-position: 10px 10px;  向右为x轴正方向、向下为y轴正方向
+
+        
+
+    media query  媒体查询
+
+    Bootcdn    Dummyimage
