@@ -1,0 +1,114 @@
+HTML笔记：
+      html标签: 网页的根元素
+      body标签：用于显示网页内容    body内可嵌套其他标签
+      head标签：储存基础信息 不显示的内容   仅可用一次
+      title标签：网页的标题
+      h1-h6标签：网页内容小标题  由h1至h6依次变小  h1仅可用一次
+      p标签：段落标签 可用于文本分段  paragraph
+      div标签：网页中划分区域 可无限嵌套   division
+      a标签：用于定义网页中的链接    anchor(锚)   'href'用于指定跳转到的链接
+            'target'用于决定在当前界面或是新界面打开目标链接   默认值为'_self'
+            表示在当前界面打开   或 '_blank' 表示在新界面打开
+            表示方式  <a href="链接" target="_self">链接名称</a>
+            书签标记：锚点
+                  利用a标签 href属性 以及 ID选择器 可以跳转至网页的某一位置
+            
+      img标签：用于定义网页中的图片  仅有头标签
+            表示方式   <img src="图片链接" alt="图片注释" title="鼠标悬停图片时提示信息">
+            图片格式：jpg:有损压缩 影响画质 小 不支持透明通道（图片的透明度）
+                     png:无损压缩 不影响画质 大 支持透明通道
+                     gif:动图
+            图片方式：网络图片： 直接利用img给出图片地址
+                     本地图片：绝对路径：从盘符算起的路径
+                              相对路径: 从当前路径算起的路径
+      表格类标签： table标签 用于定义网页中的表格  需要和其子标签共同使用
+                  tr标签(table row) 定义行  一组即为一行
+                  td标签(table data) 数据单元格  包含在tr标签中
+                  th标签(table head cell) 表头单元格  包含在thead标签中
+                  thead标签(table head)  定义表头
+                  tbody标签(table body)  定义表身
+                  colspan属性  合并列数   rowspan属性  合并行数
+      header标签：用于定义页头的标签 即页面中的引导内容   比div标签级别更高一些
+      footer标签：用于定义页脚的标签 即页面中的补充内容
+      button标签：按钮标签  需要和其他元素一同使用
+                  <button type="submit"> 提交表单
+                  <button type="reset"> 重置表单
+      abbr标签： 缩写标签 专门用来注释单词缩写后的原单词或短语
+                  <abbr title="Hyber Text Markup Language">HTML<abbr>  
+                  在网页中可对 HTML 进行注释
+      code标签：用于在网页小段代码的展示  code标签内容会镶嵌在原文中  行内元素
+      pre标签： 用于在网页大段代码的展示  pre标签内容会独立于原文
+      input元素：用于接收用户的输入    
+            type属性：
+                  <input type="text"> 默认值(可以不填type属性)，用于输入
+                        文字，如用户名，昵称等；
+                  <input type="password">密码输入
+                  <input type="radio">单选框 选项较少时
+                  <input type="checkbox">多选框 选项较少时
+                  <input type="file">选择文件 上传文件时必须使用
+                  <input type="reset">重置表单
+                  <input type="hidden" value="秘密">隐形输入框，一般用于
+                        在表单提交时回传重要的令牌（就是一串自产自销的无序字符）
+                        来验证用户是真的或状态是对的。
+                  <input type="button" value="点我">按钮 不推荐 灵活度不如button标签
+      文本格式化标签：
+            strong标签：标签内所有文字加粗
+            em标签：标签内所有文字变为斜体
+            del标签：标签内所有文字有中划线（删除线）
+            span标签: 和div标签相似 但是div标签用于包含段落区域文字 而span标签仅包含一个词
+      图片映射：
+            map标签定义地图 name属性定义地图名字  可在img标签中利用usemaop属性调用
+            area标签定义可点击区域
+                  shape属性定义区域形状（circle 圆、rect 矩形、poly 多边形）
+                  coords属性定义区域坐标   circle -》 （圆的中心点坐标，半径）
+                                          rect -》 （左上角点坐标，右下角点坐标）
+                  href属性给定跳转地址
+                  target属性定义打开形式  _blank 和 _self
+                  alt属性给出文本注释
+            eg:   <img src="qiuqiu.jpg" alt="" usemap="#qiuqiumap">
+                  <map name="qiuqiumap">
+                        <area shape="circle" coords="233,456,50" href="网址" target="_blank" alt="">
+                        <area shape="rect" coords="314,446,431,523" href="网址" target="_blank" alt="">
+                  </map>
+      列表类标签（三类）：无序列表：内容列表  ul+li  无顺序关系
+                        有序列表：内容列表  ol+li  有顺序关系
+                        自定义列表：  内容标题+内容   dl+dt+dd  标题+内容  无顺序关系
+            eg:   <ul>
+                        <li>无序列表1</li>
+                        <li>无序列表2</li>
+                  </ul>
+
+                  <ol>
+                        <li>有序列表1</li>
+                        <li>有序列表1</li>
+                  </ol>
+
+                  <dl>
+                        <dt>标题1</dt>
+                        <dd>内容1</dd>
+                        <dd>内容2</dd>
+                        <dt>标题2</dt>
+                        <dd>内容1</dd>
+                        <dd>内容2</dd>
+                  </dl>
+      form标签：表单 用于手机用户输入   然后提交或者发送给服务器
+            内容输入方式： 文本输入：普通文本、密码文本
+                          选择框输入：单选框、复选框、下拉框
+            内容提交方式：提交按钮
+            
+            action属性决定提交至哪一网页
+            method属性决定提交方式.
+                  表单常用 GET 和 POST 请求（GET将提交内容显示在网址上，POST将提交内容显示在header内。默认为GET请求方式）
+            eg:   注册页面
+                  <form action="" method="POST">
+                        用户名：<input type="text" name="usr"><br>
+                        密码：<input type="password" name="pas"><br>
+                        性别：<input type="radio" name="sex" value="male">男
+                              <input type="radio" name="sex" value="female">女<br>
+                        兴趣：<input type="checkbox"><br>
+                        下拉框：<select name="" id="">
+                              <option value="">1</option>
+                              <option value="">2</option>
+                        </select>
+                  </form>
+
