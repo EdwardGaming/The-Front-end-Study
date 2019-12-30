@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Vue基础</title>
+    </head>
+    <body>
+        <div id="app" class="app">
+            {{ message }}<!-- 差值表达式 -->
+            <h3>{{ school.name }}</h3>
+            <h3>{{ school.mobile }}</h3>
+            <ul>
+                <li>{{ campus[0] }}</li>
+                <li>{{ campus[1] }}</li>
+            </ul>
+        </div>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                /*el: "div", 
+                  el: ".app",
+                    el 挂载点  
+                    设置Vue实例挂载的元素，使用CSS选择器选择作用范围。
+                    Vue会管理el选项命中的元素及其内部的后代元素
+                    可以使用其他的选择器，但是推荐使用Id选择器
+                    可以使用其他标签，不能使用body和html标签
+                */
+                el: "#app",
+                /*data 数据对象
+                    Vue中用到的数据定义在data中
+                    data中可以写复杂类型的数据
+                    渲染复杂类型数据时，遵守js的语法即可
+                */
+                data: {
+                    message: " Hello Vue! ",
+                    school: {
+                        name: "华北电力大学",
+                        mobile: "1234"
+                    },
+                    campus: ["保定校区","北京校区"]
+                }
+            })
+        </script>
+    </body>
+</html>
