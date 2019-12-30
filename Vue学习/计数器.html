@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>计数器</title>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <button @click="sub">-</button>
+                <span>{{ num }}</span>
+                <button @click="add">+</button>
+            </div>
+        </div>
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            //创建Vue实例时：el（挂载点），data（数据），methods（方法）
+            //v-on指令的作用是绑定事件，简写为@
+            //方法中通过this关键字获取data中的数据
+            //v-text指令的作用是：设置元素的文本值，简写为{{ }}
+            //v-html指令的作用是：设置元素的innerHTML
+
+            //data中定义数据：比如num
+            //methods中添加两个方法：比如add（递增），sub（递减）
+            //使用v-text将num设置给span标签
+            //使用v-on将add，sub分别绑定给+，-按钮
+            //累加的逻辑：小于10累加，否则提示
+            //递减的逻辑：大于0递减，否则提示
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    num: 1
+                },
+                methods: {
+                    add: function() {
+                        if(this.num < 10)
+                            this.num++;
+                        else        
+                            alert("超出最大值!")
+                    },
+                    sub: function() {
+                        if(this.num > 0)
+                            this.num--;
+                        else
+                            alert("低于最小值!")
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
