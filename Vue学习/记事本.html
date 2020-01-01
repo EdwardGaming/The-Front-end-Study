@@ -1,0 +1,81 @@
+<!-- 本地应用 -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>记事本</title>
+        <style>
+            li:hover button {
+                display: inline;
+            }
+            li button {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <section id="app" style="width: 200px; position: relative;">
+            <!-- 输入框 -->
+            <header>
+                <h1>记事本</h1>
+                <input autofocus="autofocus" autocomplete="off" placeholder="请输入任务"
+                @keyup.enter="add" v-model="inputValue">
+            </header>
+            <!-- 列表区域 -->
+            <button @click="changeShow" style="position: absolute; right: 0; top: 53.71px">{{ symble }}</button>
+            <section class="main" v-show="isShow">
+                <ul>
+                   <li v-for="(item,index) in List">
+                       <div>
+                           <span>{{ index+1 }}.</span>
+                           <label>{{ item }}</label>
+                           <button @click="remove(index)">×</button>
+                       </div>
+                   </li> 
+                </ul>
+            </section>
+            <footer>
+                <span style="float: left;" v-if="List.length!=0">{{ List.length+" " }}item left</span>
+                <input type="button" value="clear" style="float: right;" @click="clear" v-if="List.length!=0"></input>
+            </footer>
+        </section>
+
+        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    List: ["吃饭饭","睡觉觉","打豆豆"],
+                    inputValue: "",
+                    isShow: true,
+                    symble: "-"
+                },
+                methods: {
+                    add: function() {
+                        this.List.push(this.inputValue);
+                        this.inputValue = "";
+                    },
+                    remove: function(index) {
+                        this.List.splice(index, 1);
+                    },
+                    clear: function() {
+                        this.List.splice(0);
+                    },
+                    changeShow: function() {
+                        this.isShow = !this.isShow;
+                        switch(this.symble){
+                            case "-":
+                                this.symble = "+";
+                                break;
+                            case "+":
+                                this.symble = "-";
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>     
