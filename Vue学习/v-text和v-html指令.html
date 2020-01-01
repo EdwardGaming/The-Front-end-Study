@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text和v-html指令</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p v-cloak>{{ msg }}</p>
+      <p v-text="msg">111</p>
+      <p v-text="msg2"></p>
+      <div v-html="msg2"></div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //利用v-cloak属性，在样式中设置 display: none 可以解决 插值表达式 闪烁问题
+      //插值表达式和v-text指令的区别：
+      //（1）v-text指令默认没有闪烁问题，而插值表达式有闪烁问题
+      //（2）v-text指令会全部覆盖原来的内容，而插值表达式只会修改所占区域的内容，其前后可以添加任意内容
+      //v-html指令完全覆盖原来的内容，并可以的解析给定内容中出现的 html 元素
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "Vue学习!",
+          msg2: "<h3>欢迎学习Vue!!!</h3>"
+        }
+      })
+    </script>
+  </body>
+</html>
