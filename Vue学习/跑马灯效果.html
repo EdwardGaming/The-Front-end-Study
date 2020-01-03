@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>跑马灯效果</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="浪起来" @click="start">
+    <input type="button" value="稳住" @click="stop">
+    <p v-cloak>{{ msg }}</p>
+  </div>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    //注意：VM实例，会监听自己身上 data 中所有数据的改变，只要数据发生一次变化，
+    //就会自动把最新的数据从 data 上同步到页面上去
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        msg: "猥 琐 发 育 别 浪 ~ ~ ~ ~ ~",
+        intervalId: null  // 在data上定义，定时器Id
+      },
+      methods: {
+        start: function() {
+          //箭头函数内部的this始终和外部的this指向一致
+          if( this.intervalId != null )
+            return;
+          this.intervalId = setInterval( () => {
+            let startStr = this.msg.substring(0, 1);
+            let endStr = this.msg.substring(1);
+            this.msg = endStr + startStr;
+          }, 300 );
+        },
+        stop: function() {
+          clearInterval( this.intervalId );
+          this.intervalId = null;
+          this.msg = "猥 琐 发 育 别 浪 ~ ~ ~ ~ ~"
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
