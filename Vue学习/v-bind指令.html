@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind指令</title>
+  </head>
+  <body>
+    <!-- v-bind: 是Vue中提供用于绑定属性的指令 -->
+    <!-- v-bind: 指令可以被简写为 :要绑定的属性 -->
+    <!-- v-bind中，可以写合法的JS表达式 -->
+    <div id="app">
+      <input type="button" value="按钮" v-bind:title="myTitle + ''">
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          myTitle: "这是我自己定义的按钮!"
+        }
+      })
+    </script>
+  </body>
+</html>
