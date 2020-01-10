@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>品牌列表</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <table class="">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Ctime</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+
+      <div>
+        <div>
+          <h3>添加品牌</h3>
+        </div>
+        <div>
+          <label>
+
+            Id:
+            <input type="text" v-model="Id">
+          </label>
+
+          <label>
+            Name:
+            <input type="text" v-model="Name" @keyup.enter="add">
+          </label>
+
+          <input type="button" value="添加" @click="add">
+
+          <label>
+            搜索名称关键字：
+            <input type="text" v-model="keywords" v-focus v-color="'blue'">
+          </label>
+
+        </div>
+      </div>
+
+      <tbody>
+        <!-- 之前， v-for 中的数据，都是直接从data上的list中直接渲染过来的 -->
+        <!-- 现在，自定义一个search方法，同时把所有的关键字，通过传参的形式，传递给了search方法 -->
+        <!-- 在 search 方法内部，通过 执行for循环，把所有符合 搜索关键字的数据，保存到一个新数组中 返回 -->
+        <tr v-for="item in search(keywords)" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.Ctime | dateFormat }}</td>
+          <td>
+            <a href="" @click.prevent="del(item.id)">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div id="app2">
+    <h3 v-fontweight="1000">{{ dt | dateFormat }}</h3>
+  </div>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    // 全局过滤器，进行时间的格式化
+    // 所有的 Vue 实例都可以使用的过滤器
+    Vue.filter('dateFormat', function (dateStr, pattern = '') {
+      // 根据给定的时间字符串，得到特定的时间
+      var dt = new Date(dateStr);
+      var y = dt.getFullYear();
+      var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+      var d = dt.getDate().toString().padStart(2, '0');
+
+      // return y + '-' + m + '-' + d;
+      if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+        return `${y}-${m}-${d}`;
+      } else {
+        var h = dt.getHours().toString().padStart(2, '0');
+        var min = dt.getMinutes().toString().padStart(2, '0');
+        var s = dt.getSeconds().toString().padStart(2, '0');
+
+        return `${y}-${m}-${d} ${h}:${min}:${s}`
+      }
+
+    })
+
+    // 使用 Vue.directive() 定义全局的指令  
+    // 其中：参数1 指令的名称，注意，在定义的时候，指令的名称前面，不需要加 v- 修饰
+    // 但是 在调用的时候，必须再指令名称前 加上 v- 前缀来进行调用
+    // 参数2 是一个对象，在这个对象身上，有一些指令相关的函数，这些函数可以在特定的阶段，执行相关的操作
+    Vue.directive('focus', {
+      bind: function (el) { // 每当指令绑定到元素上的时候，会立即执行这个 bind 函数，且只执行一次
+
+      },
+      inserted: function (el) { // inserted 表示元素 插入到DOM中的时候，会执行 inserted 函数，执行一次
+        // 注意： 在每个函数中 ，第一个参数永远是 el， 表示 被绑定了指令的那个元素
+        el.focus();
+      },
+      updated: function () { // 当VNode更新的时候，会执行 updated ，可能会触发多次
+
+      }
+    })
+
+    // 自定义一个 设置字体颜色的指令
+    Vue.directive('color', {
+      // 样式只要通过指令绑定给了元素，不管这个元素有没有被插入到页面中，这个元素一定有了一个内联样式
+      // 将来，元素只要显示到页面中，浏览器的渲染引擎必然会解析样式，应用给这个元素
+      bind: function (el, binding) {
+        el.style.color = binding.value
+      }
+    })
+
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        Id: "",
+        Name: "",
+        keywords: "",
+        list: [
+          { id: 1, name: '奔驰', Ctime: new Date() },
+          { id: 2, name: '宝马', Ctime: new Date() }
+        ]
+      },
+      methods: {
+        add: function () {
+          this.list.push(
+            { id: this.Id, name: this.Name, Ctime: new Date() }
+          );
+          this.Id = this.Name = "";
+        },
+        del: function (id) {
+          //this.list.splice(this.list.indexOf({ id: id }), 1)
+
+          /* this.list.some((item, i) => {
+            if (item.id == id) {
+              this.list.splice(i, 1);
+              //在 数组的 some 方法中，如果 return true，就会立即终止这个数组的后续循环
+              return true;
+            }
+          }) */
+
+          // 原型方法 findIndex(..) 从数组中寻找匹配值的位置索引
+          let index = this.list.findIndex(item => {
+            if (item.id == id) {
+              return true;
+            }
+          })
+          this.list.splice(index, 1);
+        },
+        search: function (keywords) {
+          let newArr = [];
+
+          // forEach some filter findIndex 这些属于数组的方法 
+          // 都会对数组中的每一项进行遍历，执行相关的操作
+
+          /* this.list.forEach(item => {
+            if (item.name.indexOf(keywords) != -1) {
+              newArr.push({ id: item.id, name: item.name, Ctime: item.Ctime });
+            }
+          })
+          return newArr; */
+
+          return newArr = this.list.filter(item => {
+            // ES6中 字符串新方法 String.prototype.includes('要包含的字符串')
+            // 如果包含，则返回 true，否则返回 false
+            return item.name.includes(keywords);
+          })
+        }
+      }
+    })
+
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        dt: new Date()
+      },
+      methods: {},
+      filters: {
+        // 定义私有过滤器  
+        // 过滤器有两个条件  过滤器名称和处理函数
+        // 过滤器调用的时候，采用就近原则，
+        // 如果私有过滤器和全局过滤器名称一致时，优先调用私有过滤器
+        dateFormat: function (dateStr, pattern = "") {
+          var dt = new Date(dateStr);
+          var y = dt.getFullYear();
+          var m = (dt.getMonth() + 1).toString().padStart(2, '0');
+          var d = (dt.getDate()).toString().padStart(2, '0');
+
+          // return y + '-' + m + '-' + d;
+          if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+            return `${y}-${m}-${d}`;
+          } else {
+            var h = (dt.getHours()).toString().padStart(2, '0');
+            var min = (dt.getMinutes()).toString().padStart(2, '0');
+            var s = (dt.getSeconds()).toString().padStart(2, '0');
+
+            return `${y}-${m}-${d} ${h}:${min}:${s} private`
+          }
+
+        }
+      },
+      directives: { // 自定义私有指令
+        // 简写形式： 如果仅在 bind 和 updated 钩子上重复动作，可采用如下简写形式，
+        // 相当于在 bind 和 updated 上分别写了如下函数功能
+        'fontweight': function (el, binding) {
+          el.style.fontWeight = binding.value;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
