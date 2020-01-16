@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>私有组件的创建</title>
+</head>
+
+<body>
+  <div id="app">
+    <login></login>
+    <login2></login2>
+  </div>
+
+  <template id="tmpl">
+    <h1>这是私有的login组件2</h1>
+  </template>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {},
+      methods: {},
+      components: {
+        login: {
+          template: "<h1>这是私有的login组件</h1>"
+        },
+        login2: {
+          template: "#tmpl"
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
