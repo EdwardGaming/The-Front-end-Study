@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件中的data与methods</title>
+</head>
+
+<body>
+  <div id="app">
+    <mycom></mycom>
+  </div>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    // 1. 组件可以有自己的 data 数据
+    // 2. 组件的 data 和 示例中的 data 不一样，实例中的 data 可以为一个对象，但是组件中的 data 必须是一个方法
+    // 3. 组件中的 data 除了必须为一个方法之外，这个方法内部，还必须返回一个方法
+    // 4. 组件中的 data 数据，使用方法和示例中的 data 使用方法完全一样！！！
+    // data 返回值必须为对象是为了多次调用组件时，data 中的数据互不影响
+    Vue.component('mycom', {
+      template: "<h1>这是全局组件 --- {{msg}}</h1>",
+      data: function () {
+        return {
+          msg: "这是组件中的 data 定义的数据"
+        }
+      },
+      methods: {}
+    })
+
+    var vm = new Vue({
+      el: "#app",
+      data: {},
+      methods: {}
+    })
+  </script>
+</body>
+
+</html>
