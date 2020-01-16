@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>全局组件的创建</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 如果要使用组件，直接把组件的名称，以HTML标签的形式，引入到页面中即可 -->
+    <my-com1></my-com1>
+    <mycom11></mycom11>
+    <mycom2></mycom2>
+    <mycom3></mycom3>
+  </div>
+
+  <template id="tmpl">
+    <div>
+      <h1>这是通过 template 元素 在外部定义的组件结构，这个方式有代码的智能提示和高亮</h1>
+      <h4>^ ^</h4>
+    </div>
+  </template>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    // 组件的 template 属性指向的模板内容，必须有且仅有唯一的根元素
+    // 第一种组件的创建方式
+    // 1.1 使用 Vue.extend 来创建全局的 Vue 组件
+    var com1 = Vue.extend({
+      template: "<h3>这是使用 Vue.extend 创建的组件</h3>"  // 通过 template 属性，指定了组件要展示的 HTML 结构
+    })
+
+    // 1.2 使用 Vue.component('组件的名称'，创建出来的组件模板对象)
+    // 如果使用 Vue.component 定义全局组件的时候，组件名称使用了 驼峰命名，则在引用组件时，需要把大写的驼峰改写为小写字母，同时两个单词之间使用 - 连接
+    Vue.component("myCom1", com1)
+
+    // Vue.component 第一个参数：组件的名称，将来在引用组件的时候，以 标签 的形式引入
+    // 第二个参数： Vue.extend 创建的组件，其中 template 就是组件将要展示的内容
+    Vue.component("mycom11", Vue.extend({
+      template: "<h3>这是使用 Vue.extend 创建的组件11</h3>"
+    }))
+
+    // 第二种组件的创建方式
+    Vue.component("mycom2", {
+      template: "<div><h3>这是直接使用 Vue.component 创建的组件</h3><span>123</span></div>"
+    })
+
+    // 第三种组件的创建方式
+    Vue.component("mycom3", {
+      template: "#tmpl"
+    })
+
+    var vm = new Vue({
+      el: "#app",
+      data: {},
+      methods: {}
+    })
+  </script>
+</body>
+
+</html>
