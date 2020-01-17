@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <com @func="show"></com>
+  </div>
+
+  <template id="tmpl">
+    <div>
+      <h1>这是 子组件</h1>
+      <input type="button" value="这是子组件的按钮。点击将会调用父组件的 func 方法" @click="myclick">
+    </div>
+  </template>
+
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        msgFromSonmsg: null
+      },
+      methods: {
+        show: function (data) {
+          console.log("调用了父组件的 show 方法 --- " + data);
+
+          this.msgFromSonmsg = data;
+        }
+      },
+      components: {
+        com: {
+          template: "#tmpl",
+          data: function () {
+            return {
+              sonmsg: { name: "大头儿子", age: 6 }
+            }
+          },
+          methods: {
+            myclick: function () {
+              this.$emit('func', this.sonmsg);
+            }
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
